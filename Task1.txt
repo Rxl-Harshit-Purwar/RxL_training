@@ -1,0 +1,107 @@
+﻿
+
+Ques 1. create employee(emp_id,employee_name,department_name,location,salary)
+
+create table employee (emp_id number, employee_name varchar2(500), department_id number, location_id number, salary number);
+
+Ques 2   create  department(dept_id,department_name)  tables
+
+create table department (department_id number, department_name varchar2(500));
+
+Ques 3  create  locations (location_id, location_name) tables with relevant attributes.
+create table locations (location_id number, location_name varchar2(500));
+
+Ques 4 create primary key on each table and foreign keys (location->department, department->employee)
+
+alter table employee add constraint emp_id primary key(emp_id)
+
+alter table department  add constraint department_id primar key(department_id)
+
+alter table locations add constraint location_id primary key(location_id)
+
+**creating foreign key for Employee table 
+
+alter table employee add foreign key(department_id) references department(department_id)
+
+**creating foreign key for Employee table 
+alter table employee add foreign key(location_id) references locations(location_id)
+
+****insert 20 employees data, 4 departments data, 2 locations data.
+
+****Location
+insert into locations(location_id,location_name) values(1,'Delhi');
+insert into locations(location_id,location_name) values(2,'Banglore');
+
+****Department table
+insert into department(department_id,department_name) values(1,'HR');
+insert into department(department_id,department_name) values(2,'Tech');
+insert into department(department_id,department_name) values(3,'Marketing');
+insert into department(department_id,department_name) values(4,'Security');
+
+
+****Employee table
+insert into employee(emp_id,employee_name,department_id,location_id,salary)
+values(1,'Amit',1,1,20000)
+insert into employee(emp_id,employee_name,department_id,location_id,salary)
+values(2,'Mohan',2,1,20000)
+insert into employee(emp_id,employee_name,department_id,location_id,salary)
+values(3,'Ram',2,1,20000)
+insert into employee(emp_id,employee_name,department_id,location_id,salary)
+values(4,'Aran',1,1,20000)
+insert into employee(emp_id,employee_name,department_id,location_id,salary)
+values(5,'Bhavesh',2,2,30000);
+insert into employee(emp_id,employee_name,department_id,location_id,salary)
+values(6,'Hari',1,2,30000);
+insert into employee(emp_id,employee_name,department_id,location_id,salary)
+values(7,'Awar',2,2,30000);
+insert into employee(emp_id,employee_name,department_id,location_id,salary)
+values(8,'Prabal',2,2,30000);
+insert into employee(emp_id,employee_name,department_id,location_id,salary)
+values(9,'Wahir',2,2,30000);
+insert into employee(emp_id,employee_name,department_id,location_id,salary)
+values(10,'Sahil',2,2,30000);
+insert into employee(emp_id,employee_name,department_id,location_id,salary)
+values(11,'Arnab',2,2,30000);
+insert into employee(emp_id,employee_name,department_id,location_id,salary)
+values(12,'Sonali',2,2,30000);
+insert into employee(emp_id,employee_name,department_id,location_id,salary)
+values(13,'Mansi',2,2,30000);
+insert into employee(emp_id,employee_name,department_id,location_id,salary)
+values(14,'Akash',2,2,30000);
+insert into employee(emp_id,employee_name,department_id,location_id,salary)
+values(15,'Manish',2,2,30000);
+insert into employee(emp_id,employee_name,department_id,location_id,salary)
+values(16,'Shourya',2,2,30000);
+insert into employee(emp_id,employee_name,department_id,location_id,salary)
+values(17,'Abhijay',2,2,30000);
+insert into employee(emp_id,employee_name,department_id,location_id,salary)
+values(18,'Ketan',2,2,30000);
+insert into employee(emp_id,employee_name,department_id,location_id,salary)
+values(19,'Harsh',2,2,30000);
+insert into employee(emp_id,employee_name,department_id,location_id,salary)
+values(20,'Ankit',2,2,30000);
+
+
+
+
+a) display all employees names and their department names
+
+select employee_name, Department_name from employee join department 
+on employee.department_id = department.department_id
+
+
+
+b) display all location_name, department_name, employee_name, where salary for atleast 3 employee should be same
+
+select location_name, department_name, employee_name, salary
+from employee join locations on employee.location_id=locations.location_id
+join department on employee.department_id=department.department_id
+
+c) select maximum salary earned from each department
+
+select department_id, MAX(salary) as max_salary
+from employee join department on employee.department_id=department.department_id group by department_id
+
+d) select location_name, department_name, average_salary(of each location)
+
+select department_name,location_name,avg(sal) from employee join locations using (location_id) join department using (department_id) group by department_name , location_name;
